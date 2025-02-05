@@ -33,7 +33,20 @@ class Router {
         }
     }
 
-    public function render() {
+    public function render($view, $datos) {
+
+        foreach( $datos as $key => $value ) {
+            $$key = $value;
+        }
+
+        
+        ob_start();
+
+        include_once __DIR__ . "/view/$view.php";
+        
+        $contenido = ob_get_clean();
+
+        include_once __DIR__ . "/includes/generalTemplate.php";
 
     }
 
