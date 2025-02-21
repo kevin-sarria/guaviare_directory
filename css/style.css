@@ -1,3 +1,18 @@
+body {
+    background-color: #EBEBEB;
+    overflow-x: auto;
+}
+
 #main__content {
-    max-height: 85vh;
+    min-height: 85vh;
+}
+
+.gradient {
+    background: linear-gradient(180deg, transparent, #ebebeb);
+    bottom: 0;
+    height: 30%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
 }
