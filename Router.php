@@ -28,12 +28,13 @@ class Router {
         if( $fn ) {
             call_user_func($fn, $this);
         } else {
-            // header('Location: /404');
-            debbuguear($this->postRoutes);
+            header('Location: /404');
         }
     }
 
     public function render($view, $datos) {
+
+        $current_url = $_SERVER['PATH_INFO'] ?? '/';
 
         foreach( $datos as $key => $value ) {
             $$key = $value;
@@ -42,11 +43,18 @@ class Router {
         
         ob_start();
 
-        include_once __DIR__ . "/view/$view.php";
+        include_once __DIR__ . "/view/public/$view.php";
         
         $contenido = ob_get_clean();
 
-        include_once __DIR__ . "/includes/generalTemplate.php";
+        if( $current_url == "/login" || $current_url == "/register" || $current_url == "/404" ) {
+            include_once __DIR__ . "/includes/authTemplate.php";
+        } else if( $current_url == "/dashboard/" ) {
+            include_once __DIR__ . "/includes/adminTemplate.php";
+        } else {
+            include_once __DIR__ . "/includes/generalTemplate.php"; 
+        }
+
 
     }
 
