@@ -47,7 +47,7 @@ class Router {
         
         $contenido = ob_get_clean();
 
-        if( $current_url == "/login" || $current_url == "/register" || $current_url == "/404" ) {
+        if( $current_url == "/login" || $current_url == "/register" || $current_url == "/recover-account" || $current_url == "/404" ) {
             include_once __DIR__ . "/includes/authTemplate.php";
         } else if( $current_url == "/dashboard/" ) {
             include_once __DIR__ . "/includes/adminTemplate.php";

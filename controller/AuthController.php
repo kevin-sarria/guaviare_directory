@@ -12,6 +12,22 @@ class AuthController {
 
     }
 
+    public static function register( Router $router ) {
+
+        $router->render('register', [
+            "title" => "Registrarse"
+        ]);
+
+    }
+
+    public static function recoverAccount( Router $router ) {
+
+        $router->render('recover_account', [
+            "title" => "Recuperar Cuenta"
+        ]);
+
+    }
+
 }
 
 

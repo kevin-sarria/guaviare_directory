@@ -15,7 +15,8 @@ $router->get('/offers', [OffersController::class, 'index']);
 
 // Auth
 $router->get('/login', [AuthController::class, 'login']);
-
+$router->get('/register', [AuthController::class, 'register']);
+$router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 
 // 404 Error
 $router->get('/404', [NotFoundController::class, 'index']);

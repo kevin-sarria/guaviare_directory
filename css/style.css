@@ -18,3 +18,28 @@ body {
     width: 100%;
     z-index: 0;
 }
+
+#container_image_login {
+    display: none;
+}
+
+@media ( min-width: 768px ) {
+    #container_image_login {
+        display: block;
+        height: 100vh;
+    }    
+}
+
+#image_login {
+    height: 0vh;
+    width: 0%;
+    object-fit: none;
+}
+
+@media (min-width: 768px) {
+    #image_login {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+    }   
+}

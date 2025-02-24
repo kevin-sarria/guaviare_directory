@@ -21,6 +21,10 @@
           <a class="nav-link link-light" href="/login">Iniciar sesion</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link link-light" href="/register">Registrarse</a>
+        </li>
+
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle link-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Perfil
