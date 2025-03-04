@@ -2,16 +2,21 @@
 
 include_once __DIR__ . "/../Router.php";
 
-class HomeController {
+class CompanyController {
 
     public static function index( Router $router ) {
 
-        $router->render('public/home', [
-            'title' => "Home"
+
+        $router->render("dashboard/company", [
+            "title" => "Empresa"
         ]);
 
     }
 
 }
+
+
+
+
 
 ?>

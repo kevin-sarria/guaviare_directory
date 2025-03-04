@@ -6,7 +6,7 @@ class OffersController {
 
     public static function index( Router $router ) {
 
-        $router->render('offers', [
+        $router->render('public/offers', [
             "title" => "Ofertas"
         ]);
 

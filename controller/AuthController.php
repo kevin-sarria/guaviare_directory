@@ -6,7 +6,7 @@ class AuthController {
 
     public static function login( Router $router ) {
 
-        $router->render('login', [
+        $router->render('public/login', [
             "title" => "Iniciar Sesion"
         ]);
 
@@ -14,7 +14,7 @@ class AuthController {
 
     public static function register( Router $router ) {
 
-        $router->render('register', [
+        $router->render('public/register', [
             "title" => "Registrarse"
         ]);
 
@@ -22,7 +22,7 @@ class AuthController {
 
     public static function recoverAccount( Router $router ) {
 
-        $router->render('recover_account', [
+        $router->render('public/recover_account', [
             "title" => "Recuperar Cuenta"
         ]);
 

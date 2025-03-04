@@ -12,18 +12,25 @@
 </head>
 
 <body>
+    
+    <main id="main__content__dashboard">
+        
+        <section class="d-flex">
+            <?php include_once __DIR__ . "/../../includes/admin/adminSidebar.php"; ?>
 
-    <?php include_once __DIR__ . "/../includes/generalHeader.php"; ?>
+            <div class="content__dashboard overflow-y-auto w-100 p-3">
+                <?php include_once __DIR__ . "/../../includes/admin/adminHeader.php"; ?>
+                <?php echo $contenido; ?>
+                <?php include_once __DIR__ . "/../../includes/generalFooter.php"; ?>
+            </div>
+        </section>
+        
 
-    <main id="main__content">
-        <?php echo $contenido; ?>
     </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <?php include_once __DIR__ . "/../includes/generalFooter.php"; ?>
-
+    <script src="/js/sidebarAdmin.js"></script>
 </body>
 
 

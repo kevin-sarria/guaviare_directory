@@ -43,14 +43,14 @@ class Router {
         
         ob_start();
 
-        include_once __DIR__ . "/view/public/$view.php";
+        include_once __DIR__ . "/view/$view.php";
         
         $contenido = ob_get_clean();
 
-        if( $current_url == "/login" || $current_url == "/register" || $current_url == "/recover-account" || $current_url == "/404" ) {
+        if( str_contains($current_url, "/login") || str_contains($current_url, "/register") || str_contains($current_url, "/recover-account") || str_contains($current_url, "/404") ) {
             include_once __DIR__ . "/includes/authTemplate.php";
-        } else if( $current_url == "/dashboard/" ) {
-            include_once __DIR__ . "/includes/adminTemplate.php";
+        } else if( str_contains($current_url, "/dashboard")) {
+            include_once __DIR__ . "/includes/admin/adminTemplate.php";
         } else {
             include_once __DIR__ . "/includes/generalTemplate.php"; 
         }

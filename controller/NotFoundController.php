@@ -6,7 +6,7 @@ class NotFoundController {
 
     public static function index( Router $router ) {
 
-        $router->render('404', [
+        $router->render('public/404', [
             "title" => "Pagina No Encontrada"
         ]);
     }

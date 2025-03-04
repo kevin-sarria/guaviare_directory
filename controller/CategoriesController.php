@@ -6,7 +6,7 @@ class CategoriesController {
 
     public static function index( Router $router ) {
 
-        $router->render('categories', [
+        $router->render('public/categories', [
             "title" => "Categorias"
         ]);
     }
