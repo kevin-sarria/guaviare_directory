@@ -5,41 +5,64 @@
     const links = document.querySelectorAll('.link-sidebar');
     const sideBar = document.querySelector('.sidebar');
     const contentDashboard = document.querySelector('.content__dashboard');
+    const btnMenuDashboard = document.querySelector('#btn_menu_dashboard');
+    const btnCloseSidebar = document.querySelector('#btn_close_sidebar');
 
-    const widthSidebar = 240;
+    let widthSidebar = 240;
+    let isOpenSidebar = true;
 
-    contentDashboard.style.marginLeft = `${widthSidebar}px`;
-    sideBar.style.marginLeft = 0;
-
-    // Fucntions or Actions to execute
+    // Actions to execute
     links.forEach( link => link.attributes.href.value === pathName ? link.classList.add('active') : '' );
 
     window.addEventListener("resize", calcWidthScreen)
-
-    function calcWidthScreen() {
-        const widthScreen = window.innerWidth;
-
-        if( widthScreen < 768 ) {
-            sideBar.classList.remove('sidebar-active');
-            sideBar.classList.add('sidebar-hidden');
-            toggleSidebar(widthScreen);
-        } else {
-            sideBar.classList.remove('sidebar-hidden');
-            sideBar.classList.add('sidebar-active');            
-            toggleSidebar(widthScreen);
-        }
-    }
-
-    function toggleSidebar(widthScreen = 0) {
-
-        if( widthScreen < 768 ) {
+    window.addEventListener("DOMContentLoaded", () => {
+        if( window.innerWidth < 1024 ) {
             contentDashboard.style.marginLeft = 0;
             sideBar.style.marginLeft = `-${widthSidebar}px`;
+            
         } else {
             contentDashboard.style.marginLeft = `${widthSidebar}px`;
             sideBar.style.marginLeft = 0;
         }
+    })
+    btnMenuDashboard.addEventListener("click", toggleIsOpenSidebar);
+    btnCloseSidebar.addEventListener("click", toggleIsOpenSidebar);
 
+
+    // Functions
+    function calcWidthScreen() {
+        const widthScreen = window.innerWidth;
+
+        if( widthScreen <= 768 ) {
+            toggleSidebar(widthScreen);
+            isOpenSidebar = false;
+        } else {
+            toggleSidebar(widthScreen);
+        }
+    }
+
+    function toggleIsOpenSidebar() {
+        const widthScreen = window.innerWidth;
+
+        isOpenSidebar = !isOpenSidebar;
+        toggleSidebar(widthScreen);
+    }
+
+    function toggleSidebar(widthScreen = 0) {
+
+        if( widthScreen <= 768 && !isOpenSidebar ) {
+            contentDashboard.style.marginLeft = 0;
+            sideBar.style.marginLeft = `-${widthSidebar}px`;
+        } else if(widthScreen <= 768 && isOpenSidebar) {
+            contentDashboard.style.marginLeft = `${widthSidebar}px`;
+            sideBar.style.marginLeft = 0;
+        } else if( widthScreen > 768 && isOpenSidebar ) {
+            contentDashboard.style.marginLeft = `${widthSidebar}px`;
+            sideBar.style.marginLeft = 0;
+        } else if( widthScreen > 768 && !isOpenSidebar ) {
+            contentDashboard.style.marginLeft = 0;
+            sideBar.style.marginLeft = `-${widthSidebar}px`;
+        }
 
     }
 

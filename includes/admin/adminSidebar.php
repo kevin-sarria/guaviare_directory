@@ -1,6 +1,10 @@
-<div class="sidebar shadow-sm p-3 bg-body">
+<div class="sidebar shadow-sm p-3 bg-body z-3">
 
-    <div class="sidebar__container d-flex flex-column justify-content-between h-100"> <!-- Sidebar Container -->
+    <div class="d-flex w-100 justify-content-end">
+        <button class="btn btn-link mb-0 fw-bold fs-3 link-danger link-underline link-underline-opacity-0" id="btn_close_sidebar">x</button>
+    </div>
+
+    <div class="sidebar__container d-flex flex-column justify-content-between" style="height: 93%;"> <!-- Sidebar Container -->
 
         <div class="sidebar__icon">
             <span class="mb-5 fw-bolder fs-4 text-center text-wrap">

@@ -54,26 +54,42 @@ body {
     position: fixed;
     height: 100vh;
     transition: 0.5s all ease-in-out;
-    flex-shrink: 0;
-}
-
-.sidebar__container {
-    
-}
-
-.sidebar__icon {
-
-}
-
-.sidebar__links {
-
-}
-
-.sidebar__options {
-    
 }
 
 .content__dashboard {
-    flex-grow: 1;
     transition: 0.5s all ease-in-out;
+}
+
+#btn_menu_dashboard:hover {
+    background-color: white;
+}
+
+
+/* Dashboard */
+
+/* Companies */
+.basic_info_company {
+    width: 100%;
+}
+
+.description_company {
+    width: 100%;
+}
+
+.basic_info_company,
+.description_company {
+    height: fit-content;
+    min-width: 10rem;
+}
+
+@media (min-width: 992px) {
+    .basic_info_company {
+        width: 25%;
+    }
+}
+
+@media ( min-width: 992px ) {
+    .description_company {
+        width: 75%;
+    }
 }
