@@ -9,6 +9,7 @@ require_once __DIR__ . "/controller/DashboardController.php";
 require_once __DIR__ . "/controller/CompanyController.php";
 require_once __DIR__ . "/controller/NotFoundController.php";
 require_once __DIR__ . "/controller/ProductsController.php";
+require_once __DIR__ . "/controller/dbOffersController.php";
 
 $router = new Router;
 
@@ -25,6 +26,7 @@ $router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/dashboard/company', [CompanyController::class, 'index']);
 $router->get('/dashboard/products', [ProductsController::class, 'index']);
+$router->get('/dashboard/offers', [dbOffersController::class, 'index']);
 
 // 404 Error
 $router->get('/404', [NotFoundController::class, 'index']);
