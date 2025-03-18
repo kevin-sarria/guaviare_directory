@@ -29,6 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (empty($errors)) {
+        $checkEmailQuery = "SELECT id FROM users WHERE email = :email";
+        $checkStmt = $pdo->prepare($checkEmailQuery);
+        $checkStmt->execute([':email' => $email]);
+
+        if ($checkStmt->fetch()) {
+            $errors[] = "El correo ya está registrado. Usa otro o inicia sesión.";
+        }
+    }
+
+    if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Encriptar contraseña
 
         // Insertar en la base de datos
