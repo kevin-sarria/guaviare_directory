@@ -9,6 +9,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Empresa</th>
                     <th>Precio</th>
                     <th>Acciones</th>
                 </tr>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>1</td>
                     <td>Producto de ejemplo</td>
+                    <td>Empresa Ejemplo</td>
                     <td>$100.00</td>
                     <td>
                         <a href="/dashboard/products/edit/1" class="btn btn-warning btn-sm">Editar</a>

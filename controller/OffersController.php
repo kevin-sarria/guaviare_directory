@@ -14,5 +14,16 @@ class OffersController {
 
 }
 
+class DashboardOffers {
+
+    public static function index( Router $router ) {
+
+        $router->render('dashboard/offers', [
+            "title" => "Ofertas"
+        ]);
+
+    }
+
+}
 
 ?>
