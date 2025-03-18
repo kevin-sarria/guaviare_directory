@@ -30,7 +30,7 @@
                 <p><a href="/recover-account">Has olvidado tu password? Recuperar Cuenta.</a></p>
                 <p><a href="/register">No tienes una cuenta? Registrate.</a></p>
 
-                <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                <button type="submit" href="/" class="btn btn-primary">Iniciar Sesion</button>
             </form>
         </div>
     </div>

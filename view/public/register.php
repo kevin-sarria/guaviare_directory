@@ -34,7 +34,7 @@
 
                 <div class="mb-3">
                     <label for="repeatPassword" class="form-label fw-semibold">Repetir Password</label>
-                    <input type="email" class="form-control" id="repeatPassword" name="repeatPassword" aria-describedby="repeatPasswordHelp">
+                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" aria-describedby="repeatPasswordHelp">
                 </div>
 
                 <div class="mb-4 form-check">
@@ -45,7 +45,7 @@
                 <p class="mb-4"><a href="/login">Ya tienes cuenta? Inicia Sesion.</a></p>
                 <p><a href="/recover-account">Has olvidado tu password? Recuperar Cuenta.</a></p>
 
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button type="submit" href="/login" class="btn btn-primary">Registrarse</button>
             </form>
         </div>
     </div>

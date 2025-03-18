@@ -10,6 +10,7 @@ require_once __DIR__ . "/controller/CompanyController.php";
 require_once __DIR__ . "/controller/NotFoundController.php";
 require_once __DIR__ . "/controller/ProductsController.php";
 require_once __DIR__ . "/controller/dbOffersController.php";
+require_once __DIR__ . '/database/users.php';
 
 $router = new Router;
 
@@ -20,6 +21,7 @@ $router->get('/offers', [OffersController::class, 'index']);
 // Auth
 $router->get('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'register']);
+$router->post('/register', [AuthController::class, 'register']);
 $router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 
 // Dashboard Sections
