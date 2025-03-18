@@ -15,7 +15,7 @@ $router = new Router;
 
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/categories', [CategoriesController::class, 'index']);
-$router->get('/offers', [OffersController::class, 'index']);
+$router->get('/offers', function($router) {OffersController::index($router, false);});
 
 // Auth
 $router->get('/login', [AuthController::class, 'login']);
@@ -27,7 +27,7 @@ $router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/dashboard/company', [CompanyController::class, 'index']);
 $router->get('/dashboard/products', [ProductsController::class, 'index']);
-$router->get('/dashboard/offers', [DashboardOffers::class, 'index']);
+$router->get('/dashboard/offers', function($router) {OffersController::index($router, true);});
 
 // 404 Error
 $router->get('/404', [NotFoundController::class, 'index']);

@@ -1,3 +1,55 @@
+<?php
+
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    global $pdo;
+
+    $username = trim($_POST["username"]);
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+    $repeatPassword = $_POST["repeatPassword"];
+    $termsAccepted = isset($_POST["termsAndConditions"]); // Checkbox de términos y condiciones
+
+    // Validaciones
+    if (empty($username) || empty($email) || empty($password) || empty($repeatPassword)) {
+        $errors[] = "Todos los campos son obligatorios.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "El email no es válido.";
+    }
+
+    if ($password !== $repeatPassword) {
+        $errors[] = "Las contraseñas no coinciden.";
+    }
+
+    if (!$termsAccepted) {
+        $errors[] = "Debes aceptar los términos y condiciones.";
+    }
+
+    if (empty($errors)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Encriptar contraseña
+
+        // Insertar en la base de datos
+        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $stmt = $pdo->prepare($sql);
+
+        try {
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $hashedPassword
+            ]);
+            header("Location: /login");
+            exit;
+        } catch (PDOException $e) {
+            $errors[] = "Error al registrar: " . $e->getMessage();
+        }
+    }
+}
+?>
+
 <!-- Cards Categories -->
 <section class="w-100 bg-body d-flex" style="height: 100vh;">
 
@@ -8,44 +60,51 @@
 
     <!-- Login Container -->
     <div class="d-flex justify-content-center align-content-center flex-lg-fill w-100 p-3">
-
         <div class="h-100 d-flex flex-column justify-content-center">
-
             <h2 class="mb-5 fw-bolder"><a href="/" class="link-secondary link-underline link-underline-opacity-0">GuaviareDirectory</a></h2>
-
             <h2 class="mb-4 text-primary fw-bolder">Registro</h2>
 
-            <form method="POST" class="w-75">
+            <!-- Mostrar errores si existen -->
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul>
+                        <?php foreach ($errors as $error): ?>
+                            <li><?= htmlspecialchars($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
+            <form method="POST" class="w-75">
                 <div class="mb-3">
                     <label for="username" class="form-label fw-semibold">Nombre de Usuario</label>
-                    <input type="text" class="form-control" id="username" name="username" aria-describedby="usernamelHelp">
+                    <input type="text" class="form-control" id="username" name="username" value="<?= htmlspecialchars($username ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label fw-semibold">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label fw-semibold">Password</label>
-                    <input type="password" class="form-control" id="password" name="paassword" aria-describedby="passwordHelp">
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
 
                 <div class="mb-3">
                     <label for="repeatPassword" class="form-label fw-semibold">Repetir Password</label>
-                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" aria-describedby="repeatPasswordHelp">
+                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword">
                 </div>
 
                 <div class="mb-4 form-check">
-                    <input type="checkbox" class="form-check-input" id="termsAndConditions">
-                    <label class="form-check-label" for="termsAndConditions" name="termsAndConditions">Aceptar <a href="/terms-&-conditions">Terminos y Condiciones</a></label>
+                    <input type="checkbox" class="form-check-input" id="termsAndConditions" name="termsAndConditions">
+                    <label class="form-check-label" for="termsAndConditions">Aceptar <a href="/terms-&-conditions">Términos y Condiciones</a></label>
                 </div>
 
-                <p class="mb-4"><a href="/login">Ya tienes cuenta? Inicia Sesion.</a></p>
-                <p><a href="/recover-account">Has olvidado tu password? Recuperar Cuenta.</a></p>
+                <p class="mb-4"><a href="/login">¿Ya tienes cuenta? Inicia sesión.</a></p>
+                <p><a href="/recover-account">¿Has olvidado tu password? Recuperar Cuenta.</a></p>
 
-                <button type="submit" href="/login" class="btn btn-primary">Registrarse</button>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
             </form>
         </div>
     </div>
