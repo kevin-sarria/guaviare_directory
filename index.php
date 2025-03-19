@@ -21,6 +21,8 @@ $router->get('/offers', function($router) {OffersController::index($router, fals
 $router->get('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'register']);
 $router->post('/register', [AuthController::class, 'register']);
+$router->post('/login', [AuthController::class, 'login']);
+$router->get('/logout', [AuthController::class, 'logout']);
 $router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 
 // Dashboard Sections
