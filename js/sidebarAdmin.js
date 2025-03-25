@@ -7,6 +7,7 @@
     const contentDashboard = document.querySelector('.content__dashboard');
     const btnMenuDashboard = document.querySelector('#btn_menu_dashboard');
     const btnCloseSidebar = document.querySelector('#btn_close_sidebar');
+    const btnCloseSession = document.querySelector('.option__logout');
 
     let widthSidebar = 240;
     let isOpenSidebar = true;
@@ -27,6 +28,7 @@
     })
     btnMenuDashboard.addEventListener("click", toggleIsOpenSidebar);
     btnCloseSidebar.addEventListener("click", toggleIsOpenSidebar);
+    btnCloseSession.addEventListener("click", closeSession);
 
 
     // Functions
@@ -64,6 +66,14 @@
             sideBar.style.marginLeft = `-${widthSidebar}px`;
         }
 
+    }
+
+    function closeSession() {
+        const closeSession = confirm("Esta Seguro/a que desea Cerrar la Sesion?");
+
+        if(closeSession) {
+            window.location.href = "/logout";
+        }
     }
 
 }))();

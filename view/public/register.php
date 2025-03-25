@@ -1,65 +1,3 @@
-<?php
-
-$errors = [];
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    global $pdo;
-
-    $username = trim($_POST["username"]);
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-    $repeatPassword = $_POST["repeatPassword"];
-    $termsAccepted = isset($_POST["termsAndConditions"]); // Checkbox de términos y condiciones
-
-    // Validaciones
-    if (empty($username) || empty($email) || empty($password) || empty($repeatPassword)) {
-        $errors[] = "Todos los campos son obligatorios.";
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "El email no es válido.";
-    }
-
-    if ($password !== $repeatPassword) {
-        $errors[] = "Las contraseñas no coinciden.";
-    }
-
-    if (!$termsAccepted) {
-        $errors[] = "Debes aceptar los términos y condiciones.";
-    }
-
-    if (empty($errors)) {
-        $checkEmailQuery = "SELECT id FROM users WHERE email = :email";
-        $checkStmt = $pdo->prepare($checkEmailQuery);
-        $checkStmt->execute([':email' => $email]);
-
-        if ($checkStmt->fetch()) {
-            $errors[] = "El correo ya está registrado. Usa otro o inicia sesión.";
-        }
-    }
-
-    if (empty($errors)) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Encriptar contraseña
-
-        // Insertar en la base de datos
-        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-        $stmt = $pdo->prepare($sql);
-
-        try {
-            $stmt->execute([
-                ':username' => $username,
-                ':email' => $email,
-                ':password' => $hashedPassword
-            ]);
-            header("Location: /login");
-            exit;
-        } catch (PDOException $e) {
-            $errors[] = "Error al registrar: " . $e->getMessage();
-        }
-    }
-}
-?>
-
 <!-- Cards Categories -->
 <section class="w-100 bg-body d-flex" style="height: 100vh;">
 
@@ -102,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
                 <div class="mb-3">
-                    <label for="repeatPassword" class="form-label fw-semibold">Repetir Password</label>
-                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword">
+                    <label for="repeat_password" class="form-label fw-semibold">Repetir Password</label>
+                    <input type="password" class="form-control" id="repeat_password" name="repeat_password">
                 </div>
 
                 <div class="mb-4 form-check">

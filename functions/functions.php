@@ -6,4 +6,9 @@
         echo "</pre>";
     }
 
+    function is_auth() {
+        if( session_status() === PHP_SESSION_NONE ) session_start();
+        return isset($_SESSION["user_id"]);
+    }
+
 ?>

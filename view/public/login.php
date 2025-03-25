@@ -1,37 +1,3 @@
-<?php
-session_start();
-
-$errors = [];
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    global $pdo;
-
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-
-    // Validar entrada
-    if (empty($email) || empty($password)) {
-        $errors[] = "Todos los campos son obligatorios.";
-    } else {
-        // Buscar el usuario en la base de datos
-        $sql = "SELECT id, username, password FROM users WHERE email = :email";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$user || !password_verify($password, $user["password"])) {
-            $errors[] = "Correo o contraseña incorrectos.";
-        } else {
-            // Iniciar sesión
-            $_SESSION["user_id"] = $user["id"];
-            $_SESSION["username"] = $user["username"];
-            header("Location: /");
-            exit;
-        }
-    }
-}
-?>
-
 <!-- Cards Categories -->
 <section class="w-100 bg-body d-flex" style="height: 100vh;">
 

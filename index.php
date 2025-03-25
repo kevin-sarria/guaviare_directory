@@ -9,13 +9,12 @@ require_once __DIR__ . "/controller/DashboardController.php";
 require_once __DIR__ . "/controller/CompanyController.php";
 require_once __DIR__ . "/controller/NotFoundController.php";
 require_once __DIR__ . "/controller/ProductsController.php";
-require_once __DIR__ . '/database/users.php';
 
 $router = new Router;
 
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/categories', [CategoriesController::class, 'index']);
-$router->get('/offers', function($router) {OffersController::index($router, false);});
+$router->get('/offers', [OffersController::class, 'viewPublic']);
 
 // Auth
 $router->get('/login', [AuthController::class, 'login']);
@@ -29,7 +28,7 @@ $router->get('/recover-account', [AuthController::class, 'recoverAccount']);
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/dashboard/company', [CompanyController::class, 'index']);
 $router->get('/dashboard/products', [ProductsController::class, 'index']);
-$router->get('/dashboard/offers', function($router) {OffersController::index($router, true);});
+$router->get('/dashboard/offers', [OffersController::class, 'viewDashboard']);
 
 // 404 Error
 $router->get('/404', [NotFoundController::class, 'index']);
